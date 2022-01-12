@@ -16,6 +16,18 @@ def main():
     pass
 
 
+def parameters_nn(neural_network):
+    parameters_list = []
+    for name, param in neural_network.named_parameters():
+        parameters_list.append(param.data)
+
+    for i in range(len(parameters_list)):
+        parameters_list[i] = parameters_list[i].numpy()
+        parameters_list[i] = tuple(map(tuple, parameters_list[i]))
+
+    return tuple(parameters_list)
+
+
 if __name__ == '__main__':
     main()
 
@@ -53,17 +65,10 @@ ax2.set_xlabel("epochs")
 plt.show()
 
 
-parameters_list = []
-for name, param in model.named_parameters():
-    parameters_list.append(param.data)
-for i in range(len(parameters_list)):
-    parameters_list[i] = parameters_list[i].numpy()
-    parameters_list[i] = tuple(map(tuple, parameters_list[i]))
-
 data_sample = torch.tensor([6.1, 5.7, 3.5, 5.5]).float()
 data_x = np.array([6.1, 5.7, 3.5, 5.5])
 feat_dimension = 4
-nn_parameter = tuple(parameters_list)
+nn_parameter = parameters_nn(model)
 total_layers = 3
 needed_layer = 3
 non_linearity = ['relu', 'relu', 'none']

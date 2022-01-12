@@ -3,7 +3,7 @@ import numpy as np
 import torch
 
 
-class QuiverRepresentations():
+class QuiverRepresentation:
 
     def __init__(self, data_sample, feature_dimension, nn_parameters, tot_layers, wanted_layer, activation_functions):
         self.data_sample = data_sample
